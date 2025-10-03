@@ -6,16 +6,11 @@
   display: flex;
   padding: 0;
   background-color: red;
-  width: 40px;
-  height: 40px;
   flex-wrap: wrap;
 }
 .box {
-  margin: 0;
   display: inline-block;
   background-color: coral;
-  height: 10px;
-  width: 10px;
 }
 .hovered {
   background-color: yellow;
