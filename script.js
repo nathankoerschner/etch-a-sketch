@@ -1,6 +1,5 @@
+// --------------------- Setup the Grid ------------------------
 const grid = document.getElementById("grid");
-// generate 16 nodes on the grid
-
 let boxes = [];
 // generate 16 boxes
 for (i = 0; i < 16; i++) {
@@ -10,8 +9,16 @@ for (i = 0; i < 16; i++) {
   boxes.push(box);
 }
 
-console.log(grid);
 boxes.forEach((box) => {
-  console.log(box);
   grid.appendChild(box);
+});
+
+// ----------- hover effect ----------------
+
+function hoverEffect(e) {
+  e.target.classList.toggle("hovered");
+}
+boxes.forEach((box) => {
+  box.addEventListener("mouseenter", hoverEffect);
+  box.addEventListener("mouseleave", hoverEffect);
 });
