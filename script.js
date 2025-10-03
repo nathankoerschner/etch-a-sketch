@@ -7,8 +7,25 @@ grid.style.width = `${GRIDSIZE}px`;
 function hoverEffect(e) {
   e.target.classList.toggle("hovered");
 }
+function colorEffect(e) {
+  e.target.classList.toggle("colored");
+}
 
+function onMouseEnter(e) {
+  hoverEffect(e);
+  if (drawing) colorEffect(e);
+}
+function onMouseExit(e) {
+  hoverEffect(e);
+}
+
+// Create a drawing effect
+// When the mouse is pressed down on the grid, and dragged, color each item it touches
+let drawing = false;
+grid.addEventListener("mousedown", () => (drawing = true));
+grid.addEventListener("mouseup", () => (drawing = false));
 let boxes = [];
+
 // generate 16 boxes
 for (i = 0; i < 16; i++) {
   const box = document.createElement("div");
@@ -22,8 +39,9 @@ boxes.forEach((box) => {
   grid.appendChild(box);
 });
 boxes.forEach((box) => {
-  box.addEventListener("mouseenter", hoverEffect);
-  box.addEventListener("mouseleave", hoverEffect);
+  box.addEventListener("mousedown", colorEffect);
+  box.addEventListener("mouseenter", onMouseEnter);
+  box.addEventListener("mouseleave", onMouseExit);
 });
 
 function reRenderBoxes(aproxNumBoxes) {
@@ -47,8 +65,9 @@ function reRenderBoxes(aproxNumBoxes) {
   }
   newBoxes.forEach((box) => {
     grid.appendChild(box);
-    box.addEventListener("mouseenter", hoverEffect);
-    box.addEventListener("mouseleave", hoverEffect);
+    box.addEventListener("mousedown", colorEffect);
+    box.addEventListener("mouseenter", onMouseEnter);
+    box.addEventListener("mouseleave", onMouseExit);
   });
 }
 
