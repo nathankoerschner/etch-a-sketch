@@ -1,5 +1,6 @@
 // --------------------- Setup the Grid ------------------------
 const GRIDSIZE = 960;
+const DEFAULT_NUMBER_OF_BOXES = 100;
 const grid = document.getElementById("grid");
 grid.style.height = `${GRIDSIZE}px`;
 grid.style.width = `${GRIDSIZE}px`;
@@ -26,13 +27,14 @@ grid.addEventListener("mousedown", () => (drawing = true));
 grid.addEventListener("mouseup", () => (drawing = false));
 let boxes = [];
 
-// generate 16 boxes
-for (i = 0; i < 16; i++) {
+// generate DEFAULT_NUMBER_OF_BOXES boxes
+let edgeSize = Math.floor(Math.sqrt(DEFAULT_NUMBER_OF_BOXES));
+for (i = 0; i < DEFAULT_NUMBER_OF_BOXES; i++) {
   const box = document.createElement("div");
   //temp styling to make it appear
   box.classList.add("box");
-  box.style.height = `${GRIDSIZE / 4}px`;
-  box.style.width = `${GRIDSIZE / 4}px`;
+  box.style.height = `${GRIDSIZE / edgeSize}px`;
+  box.style.width = `${GRIDSIZE / edgeSize}px`;
   boxes.push(box);
 }
 boxes.forEach((box) => {
@@ -75,5 +77,7 @@ function reRenderBoxes(aproxNumBoxes) {
 
 const resetButton = document.getElementById("resetButton");
 resetButton.addEventListener("click", () =>
-  reRenderBoxes(prompt("Enter the desired number of boxes", 16)),
+  reRenderBoxes(
+    prompt("Enter the desired number of boxes", DEFAULT_NUMBER_OF_BOXES),
+  ),
 );
